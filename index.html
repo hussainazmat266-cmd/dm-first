@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>WinGo Demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <button class="back">‹</button>
+    <div class="brand">WinGo<span>Demo</span></div>
+    <div class="icons">♬</div>
+  </header>
+
+  <div class="notice"><b>Demo Player</b><br><span>Virtual points only</span></div>
+
+  <section class="modes">
+    <button class="mode active"><b>◷</b><span>WinGo</span><small>30sec</small></button>
+    <button class="mode"><b>◷</b><span>WinGo</span><small>1 Min</small></button>
+    <button class="mode"><b>◷</b><span>WinGo</span><small>3 Min</small></button>
+    <button class="mode"><b>◷</b><span>WinGo</span><small>5 Min</small></button>
+  </section>
+
+  <section class="round">
+    <div>
+      <button class="how">▤ &nbsp; How to play</button>
+      <div class="label">WinGo 30sec</div>
+      <div id="recent" class="recent"></div>
+    </div>
+    <div class="timerBox">
+      <b>Time remaining</b>
+      <div id="timer">00:30</div>
+      <small id="period"></small>
+    </div>
+  </section>
+
+  <section class="filters">
+    <button class="green">Green</button>
+    <button class="violet">Violet</button>
+    <button class="red">Red</button>
+  </section>
+
+  <section class="numbers" id="numbers"></section>
+
+  <section class="multiplier">
+    <button class="selected">Random</button>
+    <button class="selected">X1</button>
+    <button>X5</button><button>X10</button><button>X20</button><button>X50</button><button>X100</button>
+  </section>
+
+  <div class="bigsmall">
+    <button class="big">Big</button>
+    <button class="small">Small</button>
+  </div>
+
+  <section class="tabs">
+    <button class="active">Game history</button>
+    <button>Chart</button>
+    <button>My history</button>
+  </section>
+
+  <section class="history">
+    <div class="head"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div>
+    <div id="history"></div>
+  </section>
+
+  <footer>Demo interface • No real-money betting</footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
