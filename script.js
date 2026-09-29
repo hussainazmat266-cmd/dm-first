@@ -1,29 +1,4 @@
-const nums=document.getElementById("numbers"), recent=document.getElementById("recent"), history=document.getElementById("history"), timer=document.getElementById("timer"), period=document.getElementById("period");
-let round=50821, seconds=30;
-const colors={0:"violet",1:"green",2:"red",3:"green",4:"red",5:"violet",6:"red",7:"green",8:"red",9:"green"};
-const initial=[6,6,7,3,1];
-
-function makeNumbers(){
-  for(let n=0;n<=9;n++){
-    const b=document.createElement("button"); b.className="num "+colors[n]; b.textContent=n;
-    b.onclick=()=>demoPick(n); nums.appendChild(b);
-  }
-}
-function demoPick(n){ alert("Demo selection: "+n+"\\nNo real-money wager is placed."); }
-function addHistory(n){
-  const row=document.createElement("div"); row.className="row";
-  row.innerHTML=`<span>${period.textContent}</span><span class="ball">${n}</span><span>${n>=5?"Big":"Small"}</span><span><i class="dot ${colors[n]}"></i></span>`;
-  history.prepend(row); while(history.children.length>8) history.lastElementChild.remove();
-}
-function updateRecent(arr){recent.innerHTML=arr.slice(-5).map(n=>`<i>${n}</i>`).join("")}
-let recentNums=[...initial]; updateRecent(recentNums);
-function newRound(){
-  round++; const n=Math.floor(Math.random()*10);
-  period.textContent="20260929"+String(round).padStart(8,"0");
-  recentNums.push(n); updateRecent(recentNums); addHistory(n); seconds=30;
-}
-period.textContent="202609290000"+round;
-setInterval(()=>{seconds--; if(seconds<=0)newRound(); timer.textContent="00:"+String(seconds).padStart(2,"0")},1000);
-makeNumbers();
-initial.slice().reverse().forEach(n=>{period.textContent="202609290000"+round;addHistory(n);round--;});
-round=50821; period.textContent="202609290000"+round;
+const tabs=document.querySelectorAll("nav button"),games=document.querySelectorAll(".game");tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.classList.remove("active"));b.classList.add("active");games.forEach(g=>g.classList.remove("active"));document.getElementById(b.dataset.g).classList.add("active")});
+const colors={0:"violet",1:"green",2:"red",3:"green",4:"red",5:"violet",6:"red",7:"green",8:"red",9:"green"},nums=document.getElementById("nums"),recent=document.getElementById("recent"),hist=document.getElementById("hist");for(let n=0;n<10;n++){let b=document.createElement("button");b.className="num "+colors[n];b.textContent=n;b.onclick=()=>alert("Demo selection: "+n);nums.appendChild(b)}let a=[6,7,3,1,9],s=30;function rec(){recent.textContent=a.slice(-5).join(" • ")}function add(){let n=Math.floor(Math.random()*10);a.push(n);rec();let r=document.createElement("div");r.className="row";r.innerHTML=`<span>Demo round</span><b>${n}</b><span>${n>=5?"Big":"Small"}</span><span>${colors[n]}</span>`;hist.prepend(r)}rec();setInterval(()=>{s--;document.getElementById("timer").textContent="00:"+String(s).padStart(2,"0");if(s<=0){s=30;add()}},1000);
+let running=false,v=1,t;start.onclick=()=>{if(running)return;running=true;v=1;status.textContent="Flying…";t=setInterval(()=>{v+=.04;mult.textContent=v.toFixed(2)+"x";plane.style.transform=`translate(${Math.min(v*9,220)}px,-${Math.min(v*6,140)}px)`;if(Math.random()<.02||v>8)end()},100)};function end(){clearInterval(t);running=false;status.textContent="Flight ended";let r=document.createElement("div");r.className="row";r.innerHTML=`<span>Demo flight</span><b>${v.toFixed(2)}x</b><span>Ended</span>`;fh.prepend(r)}reset.onclick=()=>{clearInterval(t);running=false;v=1;mult.textContent="1.00x";plane.style.transform="none";status.textContent="Ready"};
+let runs=0,w=0,sc=0;function render(){score.textContent=sc+"/"+w;overs.textContent=Math.floor(runs/6)+"."+(runs%6)}document.querySelectorAll(".scoreBtns button").forEach(b=>b.onclick=()=>{let x=b.dataset.r;runs++;if(x==="W"){w++;comment.textContent="Wicket! Demo batter out."}else{sc+=+x;comment.textContent=x==="0"?"Dot ball.":x+" run(s)!"}render()});hit.onclick=()=>document.querySelectorAll(".scoreBtns button")[Math.floor(Math.random()*6)].click();new.onclick=()=>{runs=w=sc=0;comment.textContent="New demo innings.";render()};render();
